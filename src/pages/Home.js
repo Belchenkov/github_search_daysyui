@@ -33,6 +33,7 @@ const Home = () => {
         <>
             <UserResults
                 users={users}
+                loading={loading}
             />
         </>
     );
