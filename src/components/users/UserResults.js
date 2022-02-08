@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Spinner from '../layout/Spinner';
+import UserItem from './UserItem';
 
 const UserResults = ({ users, loading }) => {
     return (
@@ -9,7 +10,10 @@ const UserResults = ({ users, loading }) => {
                 ? <Spinner />
                 : (
                     users.length > 0 && users.map((user) => (
-                        <h3>{user.login}</h3>
+                        <UserItem
+                            key={user.id}
+                            user={user}
+                        />
                     ))
                 )
             }
