@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+import Alert from './components/layout/Alert';
 import { GitHubProvider } from './context/github/GitHubContext';
 import { AlertProvider } from './context/alert/AlertContext';
 
@@ -21,6 +22,7 @@ function App() {
                   <Navbar />
 
                   <main className='container mx-auto px-3 pb-12'>
+                      <Alert />
                       <Routes>
                           <Route path='/' element={<Home />} exact />
                           <Route path='/about' element={<About />} exact />
