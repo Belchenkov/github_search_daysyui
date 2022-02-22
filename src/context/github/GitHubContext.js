@@ -13,7 +13,6 @@ export const GitHubProvider = ({ children }) => {
         user: {},
         loading: false,
     };
-
     const [state, dispatch] = useReducer(gitHubReducer, initialState);
 
     const searchUsers = async text => {
