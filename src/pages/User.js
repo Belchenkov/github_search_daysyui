@@ -9,13 +9,15 @@ import {
 
 import GitHubContext from '../context/github/GitHubContext';
 import Spinner from '../components/layout/Spinner';
+import RepoList from '../components/repos/RepoList';
 
 const User = () => {
-    const { getUser, user, loading } = useContext(GitHubContext);
+    const { getUser, user, loading, getUserRepos, repos } = useContext(GitHubContext);
     const params = useParams();
 
     useEffect(() => {
         getUser(params.login);
+        getUserRepos(params.login);
     }, []);
 
     const {
@@ -161,6 +163,8 @@ const User = () => {
                         </div>
                     </div>
                 </div>
+
+                <RepoList repos={repos} />
             </div>
         </>
     );
