@@ -2,7 +2,7 @@
 
 > App to search GitHub Users & display their info. (React, TailwindCSS, Daisy UI)
 
-### [Demo]()
+### [Demo](https://github-search-daysyui.vercel.app)
 
 ### Preview
 ![screenshot](./screen.png)
