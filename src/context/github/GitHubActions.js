@@ -1,5 +1,14 @@
+import axios from 'axios';
+
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+
+const gitHub = axios.create({
+    baseURL: GITHUB_URL,
+    headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+    },
+});
 
 export const searchUsers = async text => {
     try {
@@ -7,57 +16,26 @@ export const searchUsers = async text => {
             q: text,
         });
 
-        const res = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`,
-            },
-        });
-        const { items } = await res.json();
+        const res = await gitHub.get(`/search/users?${params}`);
 
-        return items;
+        return res.data.items;
     } catch (err) {
         console.error(err);
     }
 };
 
-export const getUser = async login => {
+export const getUserAndRepos = async login => {
     try {
-        const res = await fetch(`${GITHUB_URL}/users/${login}`, {
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`,
-            },
-        });
+        const [user, repos] = await Promise.all([
+            gitHub.get(`/users/${login}`),
+            gitHub.get(`/users/${login}/repos`),
+        ]);
 
-        if (res.status === 404) {
-            window.location = '/notfound';
-        } else {
-            return await res.json();
-        }
+        return {
+            user: user.data,
+            repos: repos.data,
+        };
     } catch (err) {
         console.error(err);
     }
 };
-
-export const getUserRepos = async (login) => {
-    try {
-        const params = new URLSearchParams({
-            sort: 'created',
-            per_page: 10,
-        });
-
-        const response = await fetch(
-            `${GITHUB_URL}/users/${login}/repos?${params}`,
-            {
-                headers: {
-                    Authorization: `token ${GITHUB_TOKEN}`,
-                },
-            }
-        )
-
-        return await response.json();
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-
