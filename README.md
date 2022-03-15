@@ -2,6 +2,11 @@
 
 > App to search GitHub Users & display their info. (React, TailwindCSS, Daisy UI)
 
+### [Demo]()
+
+### Preview
+![screenshot](./screen.png)
+
 In the project directory, you can run:
 
 ### `npm start`
